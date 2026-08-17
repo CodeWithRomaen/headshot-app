@@ -34,3 +34,11 @@ pnpm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# agent skills
+# Canonical skill content lives in .agents/skills and IS committed, along with
+# skills-lock.json. Everything below is a per-tool mirror of it that the skills
+# CLI regenerates -- on Windows these are links that git would otherwise commit
+# as a second, divergent copy. Restore them with:
+#   npx skills experimental_install
+.claude/skills/
