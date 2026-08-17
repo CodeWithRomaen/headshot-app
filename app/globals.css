@@ -4,6 +4,33 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * Landing-page design tokens.
+ *
+ * These are deliberately literal rather than theme-aware: the marketing page
+ * is a fixed light composition, so it should not invert with the app's
+ * dark-mode toggle. App surfaces keep using the shadcn tokens below.
+ */
+@theme {
+  --font-display: var(--font-instrument-serif);
+
+  --color-canvas: #fafaf9;
+  --color-canvas-alt: #f3f3f1;
+  --color-canvas-pure: #ffffff;
+  --color-ink: #15151a;
+  --color-ink-muted: #56565c;
+  --color-ink-faint: #87878d;
+  --color-ink-line: rgba(21, 21, 26, 0.08);
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-ink-faint);
+}
+
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: var(--font-sans);
@@ -122,6 +149,16 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /*
+   * The marketing page is a fixed light composition, so keep the document
+   * chrome — overscroll gutter, scrollbars, form controls — light even when
+   * the app theme is dark. App routes are unaffected.
+   */
+  html:has([data-surface="marketing"]) {
+    background-color: var(--color-canvas);
+    /* next-themes writes color-scheme inline on <html>, so this needs to win. */
+    color-scheme: light !important;
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
